@@ -65,6 +65,10 @@ public class Maincontroller {
 		return database.getEmployeeList();
 	}
 	
+	public Employee getLoggedInEmployee() {
+		return this.employee;
+	}
+	
 	public boolean changeLocation(int x) {
 
 		boolean change = false;
