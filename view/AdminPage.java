@@ -49,6 +49,11 @@ import models.Employee;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import java.awt.SystemColor;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
 
 public class AdminPage extends JFrame {
 
@@ -57,6 +62,7 @@ public class AdminPage extends JFrame {
 	private JTextField textField;
 	private Maincontroller maincontroller;
 	private JTable table_1;
+	private JTextField AddAssetss;
 
 	/**
 	 * Launch the application.
@@ -79,12 +85,12 @@ public class AdminPage extends JFrame {
 	 */
 	public AdminPage() {
 		
-		maincontroller = Maincontroller.getMaincontroller()
-				;
+		maincontroller = Maincontroller.getMaincontroller();
+		
 		setTitle("CEU");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AdminPage.class.getResource("/Images/download (2).jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 685, 411);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,7 +105,7 @@ public class AdminPage extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(105, 142, 488, 216);
 		panel.add(scrollPane);
 		
@@ -114,53 +120,29 @@ public class AdminPage extends JFrame {
 		layeredPane.add(frontPage, "name_196395047824700");
 		frontPage.setLayout(null);
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 228, 225));
+		panel_2.setBounds(120, 34, 243, 151);
+		frontPage.add(panel_2);
+		panel_2.setLayout(null);
+		
 		JLabel lblWelcome = new JLabel("Welcome");
+		lblWelcome.setBounds(12, 25, 108, 37);
+		panel_2.add(lblWelcome);
+		lblWelcome.setForeground(Color.BLACK);
 		lblWelcome.setFont(new Font("Serif", Font.BOLD, 28));
-		lblWelcome.setBounds(130, 68, 180, 79);
-		frontPage.add(lblWelcome);
+		
+		JLabel lblBack = new JLabel(maincontroller.getLoggedInEmployee().getFirstname() + " " +maincontroller.getLoggedInEmployee().getLastname() );
+		lblBack.setForeground(Color.BLACK);
+		lblBack.setFont(new Font("Serif", Font.BOLD, 21));
+		lblBack.setBounds(22, 79, 209, 37);
+		panel_2.add(lblBack);
 		
 		JPanel ListofEmployees = new JPanel();
 		ListofEmployees.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		layeredPane.setLayer(ListofEmployees, 0);
 		ListofEmployees.setBackground(new Color(112, 128, 144));
 		layeredPane.add(ListofEmployees, "name_196395057713500");
-		
-		
-		String data[][] = new String [maincontroller.getEmployeeList().size()][6];
-		
-		for(int i = 0; i < maincontroller.getEmployeeList().size(); i++) {
-			for(int j = 0; j < 6; j++) {
-				
-			if(j == 0) {
-				data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getEmployee_id());
-			}else if(j == 1) {
-				data[i][j]= maincontroller.getEmployeeList().get(i).getPosition_title();
-			}else if(j == 2) {
-				data[i][j]= maincontroller.getEmployeeList().get(i).getFirstname();
-			}else if(j == 3) {
-				data[i][j]= maincontroller.getEmployeeList().get(i).getLastname();
-			}else if(j == 4) {
-				data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getAge());
-			}else if(j == 5) {
-				data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getPhone_number());
-			}
-			}	
-		}
-		
-		String coloumns [] = {"ID#", "Position", "First Name", "Last Name", "Age", "Contact Information"};
-		JTable table = new JTable(data, coloumns);
-		
-
-		table.setForeground(new Color(138, 43, 226));
-		table.setBackground(new Color(230, 230, 250));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridheight = 2;
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 1;
-		gbc_list.gridy = 1;
-		JScrollPane pane = new JScrollPane(table);
-		ListofEmployees.add(pane, gbc_list);
 			
 		JLabel lblXxxx = new JLabel("XXXX");
 		lblXxxx.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -184,43 +166,9 @@ public class AdminPage extends JFrame {
 		InOut.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		InOut.setBackground(new Color(112, 128, 144));
 		layeredPane.add(InOut, "name_196395069402300");
-		
-		String data07[][] = new String [maincontroller.getEmployeeList().size()][5];
-		
-		for(int i = 0; i < maincontroller.getEmployeeList().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data07[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getEmployeeId());
-			}else if(j == 1) {
-				data07[i][j]= maincontroller.getEmployeeList().get(i).getPosition_title();
-			}else if(j == 2) {
-				data07[i][j]= maincontroller.getEmployeeList().get(i).getFirstname();
-			}else if(j == 3) {
-				data07[i][j]= maincontroller.getEmployeeList().get(i).getLastname();
-			}else if(j == 4) {
-				data07[i][j]= maincontroller.getEmployeeList().get(i).getStatus_name();
-			}
-			}	
-		}
-		
-		
-		String coloumns07 [] = {"ID#", "Position", "First Name", "Last Name", "Checked"};
-		JTable table07 = new JTable(data07, coloumns07);
-
-		table07.setForeground(new Color(138, 43, 226));
-		table07.setBackground(new Color(230, 230, 250));
-		table07.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list07 = new GridBagConstraints();
-		gbc_list07.gridheight = 2;
-		gbc_list07.fill = GridBagConstraints.BOTH;
-		gbc_list07.gridx = 1;
-		gbc_list07.gridy = 1;
-		InOut.add(new JScrollPane(table07), gbc_list07);
-		
-		
-		
+	
 		JPanel AddAssets = new JPanel();
+		AddAssets.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		AddAssets.setBackground(new Color(112, 128, 144));
 		layeredPane.add(AddAssets, "name_196395080912800");
 		
@@ -229,121 +177,15 @@ public class AdminPage extends JFrame {
 		UpdateAssets.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		layeredPane.add(UpdateAssets, "name_196395090475400");
 		
-		String data09[][] = new String [maincontroller.getAssets().size()][5];
-		
-		for(int i = 0; i < maincontroller.getAssets().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data09[i][j]= maincontroller.getAssets().get(i).getName();
-			}else if(j == 1) {
-				data09[i][j]= maincontroller.getAssets().get(i).getStats();
-			}else if(j == 2) {
-				data09[i][j]= maincontroller.getAssets().get(i).getLocation();
-			}else if(j == 3) {
-				data09[i][j]= maincontroller.getAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
-			}else if(j == 4) {
-				data09[i][j]= maincontroller.getAssets().get(i).getLastname();
-			}
-			}	
-		}
-		
-		String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
-		JTable table_9 = new JTable(data09, coloumns01);
-		
-		table_9.setForeground(new Color(138, 43, 226));
-		table_9.setBackground(new Color(230, 230, 250));
-		table_9.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list09 = new GridBagConstraints();
-		gbc_list09.anchor = GridBagConstraints.NORTHWEST;
-		gbc_list09.gridx = 1;
-		gbc_list09.gridy = 1;
-				
-		GridBagConstraints gbc_table_9 = new GridBagConstraints();
-		gbc_table_9.insets = new Insets(0, 0, 5, 0);
-		gbc_table_9.fill = GridBagConstraints.BOTH;
-		gbc_table_9.gridx = 0;
-		gbc_table_9.gridy = 1;
-		UpdateAssets.add(new JScrollPane(table_9), gbc_list09);
-		
 		JPanel GPAssets = new JPanel();
 		GPAssets.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GPAssets.setBackground(new Color(112, 128, 144));
 		layeredPane.add(GPAssets, "name_196395099922000");
-		
-		String data02[][] = new String [maincontroller.getGPAssets().size()][5];
-		
-		for(int i = 0; i < maincontroller.getGPAssets().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data02[i][j]= maincontroller.getGPAssets().get(i).getName();
-			}else if(j == 1) {
-				data02[i][j]= maincontroller.getGPAssets().get(i).getStats();
-			}else if(j == 2) {
-				data02[i][j]= maincontroller.getGPAssets().get(i).getLocation();
-			}else if(j == 3) {
-				data02[i][j]= maincontroller.getGPAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
-			}else if(j == 4) {
-				data02[i][j]= maincontroller.getGPAssets().get(i).getLastname();
-			}
-			}	
-		}
-		
-		
-		String coloumns02 [] = {"Item", "Availablity", "Location", "Checked Out By"};
-		JTable table02 = new JTable(data02, coloumns02);
 
-		table02.setForeground(new Color(138, 43, 226));
-		table02.setBackground(new Color(230, 230, 250));
-		table02.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list02 = new GridBagConstraints();
-		gbc_list02.gridheight = 2;
-		gbc_list02.fill = GridBagConstraints.BOTH;
-		gbc_list02.gridx = 1;
-		gbc_list02.gridy = 1;
-		GPAssets.add(new JScrollPane(table02), gbc_list02);
-		
-		
-		
 		JPanel LVAssets = new JPanel();
 		LVAssets.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		LVAssets.setBackground(new Color(112, 128, 144));
 		layeredPane.add(LVAssets, "name_196395112089900");
-		
-		String data03[][] = new String [maincontroller.getLvAssets().size()][5];
-		
-		for(int i = 0; i < maincontroller.getLvAssets().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data03[i][j]= maincontroller.getLvAssets().get(i).getName();
-			}else if(j == 1) {
-				data03[i][j]= maincontroller.getLvAssets().get(i).getStats();
-			}else if(j == 2) {
-				data03[i][j]= maincontroller.getLvAssets().get(i).getLocation();
-			}else if(j == 3) {
-				data03[i][j]= maincontroller.getLvAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
-			}else if(j == 4) {
-				data03[i][j]= maincontroller.getLvAssets().get(i).getLastname();
-			}
-			}	
-		}
-		
-		
-		String coloumns03 [] = {"Item", "Availablity", "Location", "Checked Out By"};
-		JTable table03 = new JTable(data03, coloumns03);
-
-		table03.setForeground(new Color(138, 43, 226));
-		table03.setBackground(new Color(230, 230, 250));
-		table03.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list03 = new GridBagConstraints();
-		gbc_list03.gridheight = 2;
-		gbc_list03.fill = GridBagConstraints.BOTH;
-		gbc_list03.gridx = 1;
-		gbc_list03.gridy = 1;
-		LVAssets.add(new JScrollPane(table03), gbc_list03);
-		
 		
 		JPanel ViewAllAssets = new JPanel();
 		ViewAllAssets.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -353,167 +195,28 @@ public class AdminPage extends JFrame {
 		
 		ViewAllAssets.setLayout(gbl_ViewAllAssets);
 				
-		String data01[][] = new String [maincontroller.getAssets().size()][5];
-		
-		for(int i = 0; i < maincontroller.getAssets().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data01[i][j]= maincontroller.getAssets().get(i).getName();
-			}else if(j == 1) {
-				data01[i][j]= maincontroller.getAssets().get(i).getStats();
-			}else if(j == 2) {
-				data01[i][j]= maincontroller.getAssets().get(i).getLocation();
-			}else if(j == 3) {
-				data01[i][j]= maincontroller.getAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
-			}else if(j == 4) {
-				data01[i][j]= maincontroller.getAssets().get(i).getLastname();
-			}
-			}	
-		}
-		
-		JTable table_1 = new JTable(data01, coloumns01);
-		table_1.setFillsViewportHeight(true);
-
-		table_1.setForeground(new Color(138, 43, 226));
-		table_1.setBackground(new Color(230, 230, 250));
-		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list01 = new GridBagConstraints();
-		gbc_list01.anchor = GridBagConstraints.NORTHWEST;
-		gbc_list01.gridx = 1;
-		gbc_list01.gridy = 1;
-				
-		GridBagConstraints gbc_table_1 = new GridBagConstraints();
-		gbc_table_1.insets = new Insets(0, 0, 5, 0);
-		gbc_table_1.fill = GridBagConstraints.BOTH;
-		gbc_table_1.gridx = 0;
-		gbc_table_1.gridy = 1;
-		ViewAllAssets.add(new JScrollPane(table_1), gbc_list01);
 		
 		JPanel Borrowed = new JPanel();
 		Borrowed.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		Borrowed.setBackground(new Color(112, 128, 144));
 		layeredPane.add(Borrowed, "name_196395132227700");
 		
-		String data04[][] = new String [maincontroller.getBorrowed().size()][5];
 		
-		for(int i = 0; i < maincontroller.getBorrowed().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data04[i][j]= maincontroller.getBorrowed().get(i).getName();
-			}else if(j == 1) {
-				data04[i][j]= maincontroller.getBorrowed().get(i).getStats();
-			}else if(j == 2) {
-				data04[i][j]= maincontroller.getBorrowed().get(i).getLocation();
-			}else if(j == 3) {
-				data04[i][j]= maincontroller.getBorrowed().get(i).getFirstname() +" "+ maincontroller.getBorrowed().get(i).getLastname();
-			}else if(j == 4) {
-				data04[i][j]= maincontroller.getBorrowed().get(i).getLastname();
-			}
-			}	
-		}
-		
-		JTable table_4 = new JTable(data04, coloumns01);
-
-		table_4.setForeground(new Color(138, 43, 226));
-		table_4.setBackground(new Color(230, 230, 250));
-		table_4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list04 = new GridBagConstraints();
-		gbc_list04.anchor = GridBagConstraints.NORTHWEST;
-		gbc_list04.gridx = 1;
-		gbc_list04.gridy = 1;
-				
-		GridBagConstraints gbc_table_4 = new GridBagConstraints();
-		gbc_table_4.insets = new Insets(0, 0, 5, 0);
-		gbc_table_4.fill = GridBagConstraints.BOTH;
-		gbc_table_4.gridx = 0;
-		gbc_table_4.gridy = 1;
-		Borrowed.add(new JScrollPane(table_4), gbc_list04);
 		
 		JPanel Returned = new JPanel();
 		Returned.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		Returned.setBackground(new Color(112, 128, 144));
 		layeredPane.add(Returned, "name_196395141658700");
 		
-		String data05[][] = new String [maincontroller.getReturned().size()][5];
 		
-		for(int i = 0; i < maincontroller.getReturned().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data05[i][j]= maincontroller.getReturned().get(i).getName();
-			}else if(j == 1) {
-				data05[i][j]= maincontroller.getReturned().get(i).getStats();
-			}else if(j == 2) {
-				data05[i][j]= maincontroller.getReturned().get(i).getLocation();
-			}else if(j == 3) {
-				data05[i][j]= maincontroller.getReturned().get(i).getFirstname() +" "+ maincontroller.getReturned().get(i).getLastname();
-			}else if(j == 4) {
-				data05[i][j]= maincontroller.getReturned().get(i).getLastname();
-			}
-			}	
-		}
-		
-		JTable table_5 = new JTable(data05, coloumns01);
-
-		table_5.setForeground(new Color(138, 43, 226));
-		table_5.setBackground(new Color(230, 230, 250));
-		table_5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list05 = new GridBagConstraints();
-		gbc_list05.anchor = GridBagConstraints.NORTHWEST;
-		gbc_list05.gridx = 1;
-		gbc_list05.gridy = 1;
-				
-		GridBagConstraints gbc_table_5 = new GridBagConstraints();
-		gbc_table_5.insets = new Insets(0, 0, 5, 0);
-		gbc_table_5.fill = GridBagConstraints.BOTH;
-		gbc_table_5.gridx = 0;
-		gbc_table_5.gridy = 1;
-		Returned.add(new JScrollPane(table_5), gbc_list05);
 		
 		JPanel Available = new JPanel();
 		Available.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		Available.setBackground(new Color(112, 128, 144));
 		layeredPane.add(Available, "name_196395151350100");
 		
-		String data06[][] = new String [maincontroller.getAvailable().size()][5];
-		
-		for(int i = 0; i < maincontroller.getAvailable().size(); i++) {
-			for(int j = 0; j < 5; j++) {
-				
-			if(j == 0) {
-				data06[i][j]= maincontroller.getAvailable().get(i).getName();
-			}else if(j == 1) {
-				data06[i][j]= maincontroller.getAvailable().get(i).getStats();
-			}else if(j == 2) {
-				data06[i][j]= maincontroller.getAvailable().get(i).getLocation();
-			}else if(j == 3) {
-				data06[i][j]= maincontroller.getAvailable().get(i).getFirstname() +" "+ maincontroller.getAvailable().get(i).getLastname();
-			}else if(j == 4) {
-				data06[i][j]= maincontroller.getAvailable().get(i).getLastname();
-			}
-			}	
-		}
-		
-		JTable table_6 = new JTable(data06, coloumns01);
-
-		table_6.setForeground(new Color(138, 43, 226));
-		table_6.setBackground(new Color(230, 230, 250));
-		table_6.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_list06 = new GridBagConstraints();
-		gbc_list06.anchor = GridBagConstraints.NORTHWEST;
-		gbc_list06.gridx = 1;
-		gbc_list06.gridy = 1;
-				
-		GridBagConstraints gbc_table_6 = new GridBagConstraints();
-		gbc_table_6.insets = new Insets(0, 0, 5, 0);
-		gbc_table_6.fill = GridBagConstraints.BOTH;
-		gbc_table_6.gridx = 0;
-		gbc_table_6.gridy = 1;
-		Available.add(new JScrollPane(table_6), gbc_list06);
-		
 		JPanel AccountInfos = new JPanel();
+		AccountInfos.setForeground(new Color(0, 0, 0));
 		AccountInfos.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		AccountInfos.setBackground(new Color(255, 228, 225));
 		layeredPane.add(AccountInfos, "name_196395160735600");
@@ -528,6 +231,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.setLayout(gbl_panel_3);
 		
 		JLabel label_31 = new JLabel("AAA");
+		label_31.setBackground(new Color(255, 228, 225));
 		label_31.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_label_31 = new GridBagConstraints();
 		gbc_label_31.insets = new Insets(0, 0, 5, 5);
@@ -536,6 +240,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(label_31, gbc_label_31);
 		
 		JLabel label_32 = new JLabel("AAA");
+		label_32.setBackground(new Color(255, 228, 225));
 		label_32.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_32.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_label_32 = new GridBagConstraints();
@@ -545,6 +250,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(label_32, gbc_label_32);
 		
 		JLabel label_30 = new JLabel("AAA");
+		label_30.setBackground(new Color(255, 228, 225));
 		label_30.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_label_30 = new GridBagConstraints();
 		gbc_label_30.insets = new Insets(0, 0, 5, 5);
@@ -553,6 +259,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(label_30, gbc_label_30);
 		
 		JLabel lblPersonalInformation_1 = new JLabel("Personal Information");
+		lblPersonalInformation_1.setBackground(new Color(0, 0, 0));
 		lblPersonalInformation_1.setForeground(new Color(240, 255, 255));
 		lblPersonalInformation_1.setFont(new Font("Constantia", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonalInformation_1 = new GridBagConstraints();
@@ -564,6 +271,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(lblPersonalInformation_1, gbc_lblPersonalInformation_1);
 		
 		JLabel label_28 = new JLabel("AAA");
+		label_28.setBackground(new Color(255, 228, 225));
 		label_28.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_label_28 = new GridBagConstraints();
 		gbc_label_28.gridwidth = 7;
@@ -573,6 +281,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(label_28, gbc_label_28);
 		
 		JLabel lblI = new JLabel("AAA");
+		lblI.setBackground(new Color(255, 228, 225));
 		lblI.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_lblI = new GridBagConstraints();
 		gbc_lblI.insets = new Insets(0, 0, 5, 5);
@@ -581,6 +290,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(lblI, gbc_lblI);
 		
 		JLabel label_11 = new JLabel("AAA");
+		label_11.setBackground(new Color(255, 228, 225));
 		label_11.setForeground(new Color(119, 136, 153));
 		GridBagConstraints gbc_label_11 = new GridBagConstraints();
 		gbc_label_11.insets = new Insets(0, 0, 5, 5);
@@ -589,6 +299,7 @@ public class AdminPage extends JFrame {
 		AccountInfos.add(label_11, gbc_label_11);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setBackground(new Color(0, 0, 0));
 		lblFirstName.setForeground(new Color(240, 255, 255));
 		lblFirstName.setFont(new Font("Constantia", Font.BOLD, 15));
 		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
@@ -846,6 +557,42 @@ public class AdminPage extends JFrame {
 				layeredPane.add(ListofEmployees);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				ListofEmployees.removeAll();
+				
+				String data[][] = new String [maincontroller.getEmployeeList().size()][6];
+				
+				for(int i = 0; i < maincontroller.getEmployeeList().size(); i++) {
+					for(int j = 0; j < 6; j++) {
+						
+					if(j == 0) {
+						data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getEmployee_id());
+					}else if(j == 1) {
+						data[i][j]= maincontroller.getEmployeeList().get(i).getPosition_title();
+					}else if(j == 2) {
+						data[i][j]= maincontroller.getEmployeeList().get(i).getFirstname();
+					}else if(j == 3) {
+						data[i][j]= maincontroller.getEmployeeList().get(i).getLastname();
+					}else if(j == 4) {
+						data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getAge());
+					}else if(j == 5) {
+						data[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getPhone_number());
+					}
+					}	
+				}
+				
+				String coloumns [] = {"ID#", "Position", "First Name", "Last Name", "Age", "Contact Information"};
+				JTable table = new JTable(data, coloumns);
+				
+
+				table.setForeground(new Color(138, 43, 226));
+				table.setBackground(new Color(255, 228, 225));
+				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list = new GridBagConstraints();
+				gbc_list.gridheight = 2;
+				gbc_list.fill = GridBagConstraints.BOTH;
+				gbc_list.gridx = 1;
+				gbc_list.gridy = 1;
+				ListofEmployees.add(new JScrollPane(table), gbc_list);
 			}
 		});
 		
@@ -858,6 +605,40 @@ public class AdminPage extends JFrame {
 				layeredPane.add(InOut);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				InOut.removeAll();
+				
+				String data07[][] = new String [maincontroller.getEmployeeList().size()][5];
+				
+				for(int i = 0; i < maincontroller.getEmployeeList().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data07[i][j]= String.valueOf(maincontroller.getEmployeeList().get(i).getEmployeeId());
+					}else if(j == 1) {
+						data07[i][j]= maincontroller.getEmployeeList().get(i).getPosition_title();
+					}else if(j == 2) {
+						data07[i][j]= maincontroller.getEmployeeList().get(i).getFirstname();
+					}else if(j == 3) {
+						data07[i][j]= maincontroller.getEmployeeList().get(i).getLastname();
+					}else if(j == 4) {
+						data07[i][j]= maincontroller.getEmployeeList().get(i).getStatus_name();
+					}
+					}	
+				}
+				
+				
+				String coloumns07 [] = {"ID#", "Position", "First Name", "Last Name", "Checked"};
+				JTable table07 = new JTable(data07, coloumns07);
+
+				table07.setForeground(new Color(138, 43, 226));
+				table07.setBackground(new Color(255, 228, 225));
+				table07.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list07 = new GridBagConstraints();
+				gbc_list07.gridheight = 2;
+				gbc_list07.fill = GridBagConstraints.BOTH;
+				gbc_list07.gridx = 1;
+				gbc_list07.gridy = 1;
+				InOut.add(new JScrollPane(table07), gbc_list07);
 			}
 		});
 	
@@ -873,6 +654,56 @@ public class AdminPage extends JFrame {
 				layeredPane.add(AddAssets);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				
+				AddAssets.setBackground(new Color(255, 228, 225));
+				AddAssets.setBounds(46, 13, 387, 191);
+				AddAssets.setLayout(null);
+				
+				AddAssetss = new JTextField();
+				AddAssetss.setBounds(99, 51, 182, 22);
+				AddAssets.add(AddAssetss);
+				AddAssetss.setColumns(10);
+				
+				JComboBox<String> comboBox = new JComboBox<String>();
+				comboBox.setBounds(99, 107, 182, 22);
+				AddAssets.add(comboBox);
+				comboBox.addItem("CEU MAKATI GP");
+				comboBox.addItem("CEU MAKATI LV");
+				
+				JButton btnNewButton = new JButton("Add ");
+				btnNewButton.setBackground(new Color(240,240,240));
+				btnNewButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						btnNewButton.setBackground(Color.PINK);
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						btnNewButton.setBackground(new Color(240,240,240));
+					}
+				});
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						if(maincontroller.addAsset(AddAssetss.getText(), comboBox.getItemAt(comboBox.getSelectedIndex())) && !AddAssetss.getText().equalsIgnoreCase("")) {
+							JOptionPane.showMessageDialog(null, "ASSET SUCCESSFULLY ADDED");
+							AddAssetss.setText("");
+						}else {
+							JOptionPane.showMessageDialog(null, "ERROR \n Problem adding new asset \n error-2903");
+						}
+					}
+				});
+				
+				btnNewButton.setBounds(163, 142, 97, 25);
+				AddAssets.add(btnNewButton);
+					
+				JLabel lblWhatAssetsDo = new JLabel("What Assets do you want to add:");
+				lblWhatAssetsDo.setBounds(120, 22, 190, 16);
+				AddAssets.add(lblWhatAssetsDo);
+				
+				JLabel lblWhichBranchHas = new JLabel("Which branch has it:");
+				lblWhichBranchHas.setBounds(120, 86, 164, 16);
+				AddAssets.add(lblWhichBranchHas);
 			}
 		});
 		mnAssets.add(mntmAddAssets);
@@ -884,6 +715,44 @@ public class AdminPage extends JFrame {
 				layeredPane.add(UpdateAssets);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				UpdateAssets.removeAll();
+				
+				String data09[][] = new String [maincontroller.getAssets().size()][5];
+				
+				for(int i = 0; i < maincontroller.getAssets().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data09[i][j]= maincontroller.getAssets().get(i).getName();
+					}else if(j == 1) {
+						data09[i][j]= maincontroller.getAssets().get(i).getStats();
+					}else if(j == 2) {
+						data09[i][j]= maincontroller.getAssets().get(i).getLocation();
+					}else if(j == 3) {
+						data09[i][j]= maincontroller.getAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
+					}else if(j == 4) {
+						data09[i][j]= maincontroller.getAssets().get(i).getLastname();
+					}
+					}	
+				}
+				
+				String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+				JTable table_9 = new JTable(data09, coloumns01);
+				
+				table_9.setForeground(new Color(138, 43, 226));
+				table_9.setBackground(new Color(255, 228, 225));
+				table_9.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list09 = new GridBagConstraints();
+				gbc_list09.anchor = GridBagConstraints.NORTHWEST;
+				gbc_list09.gridx = 1;
+				gbc_list09.gridy = 1;
+						
+				GridBagConstraints gbc_table_9 = new GridBagConstraints();
+				gbc_table_9.insets = new Insets(0, 0, 5, 0);
+				gbc_table_9.fill = GridBagConstraints.BOTH;
+				gbc_table_9.gridx = 0;
+				gbc_table_9.gridy = 1;
+				UpdateAssets.add(new JScrollPane(table_9), gbc_list09);
 			}
 		});
 		mnAssets.add(mntmUpdateAssets);
@@ -898,6 +767,40 @@ public class AdminPage extends JFrame {
 				layeredPane.add(GPAssets);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				GPAssets.removeAll();
+				
+				String data02[][] = new String [maincontroller.getGPAssets().size()][5];
+				
+				for(int i = 0; i < maincontroller.getGPAssets().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data02[i][j]= maincontroller.getGPAssets().get(i).getName();
+					}else if(j == 1) {
+						data02[i][j]= maincontroller.getGPAssets().get(i).getStats();
+					}else if(j == 2) {
+						data02[i][j]= maincontroller.getGPAssets().get(i).getLocation();
+					}else if(j == 3) {
+						data02[i][j]= maincontroller.getGPAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
+					}else if(j == 4) {
+						data02[i][j]= maincontroller.getGPAssets().get(i).getLastname();
+					}
+					}	
+				}
+				
+				
+				String coloumns02 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+				JTable table02 = new JTable(data02, coloumns02);
+
+				table02.setForeground(new Color(138, 43, 226));
+				table02.setBackground(new Color(255, 228, 225));
+				table02.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list02 = new GridBagConstraints();
+				gbc_list02.gridheight = 2;
+				gbc_list02.fill = GridBagConstraints.BOTH;
+				gbc_list02.gridx = 1;
+				gbc_list02.gridy = 1;
+				GPAssets.add(new JScrollPane(table02), gbc_list02);	
 			}
 		});
 		mnInventories.add(mntmCeuMakatiGp);
@@ -909,6 +812,40 @@ public class AdminPage extends JFrame {
 				layeredPane.add(LVAssets);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				LVAssets.removeAll();
+				
+				String data03[][] = new String [maincontroller.getLvAssets().size()][5];
+				
+				for(int i = 0; i < maincontroller.getLvAssets().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data03[i][j]= maincontroller.getLvAssets().get(i).getName();
+					}else if(j == 1) {
+						data03[i][j]= maincontroller.getLvAssets().get(i).getStats();
+					}else if(j == 2) {
+						data03[i][j]= maincontroller.getLvAssets().get(i).getLocation();
+					}else if(j == 3) {
+						data03[i][j]= maincontroller.getLvAssets().get(i).getFirstname() +" "+ maincontroller.getLvAssets().get(i).getLastname();
+					}else if(j == 4) {
+						data03[i][j]= maincontroller.getLvAssets().get(i).getLastname();
+					}
+					}	
+				}
+				
+				
+				String coloumns03 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+				JTable table03 = new JTable(data03, coloumns03);
+
+				table03.setForeground(new Color(138, 43, 226));
+				table03.setBackground(new Color(255, 228, 225));
+				table03.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list03 = new GridBagConstraints();
+				gbc_list03.gridheight = 2;
+				gbc_list03.fill = GridBagConstraints.BOTH;
+				gbc_list03.gridx = 1;
+				gbc_list03.gridy = 1;
+				LVAssets.add(new JScrollPane(table03), gbc_list03);
 				
 			}
 		});
@@ -921,6 +858,46 @@ public class AdminPage extends JFrame {
 				layeredPane.add(ViewAllAssets);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				ViewAllAssets.removeAll();
+				
+				String data01[][] = new String [maincontroller.getAssets().size()][5];
+				
+				for(int i = 0; i < maincontroller.getAssets().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data01[i][j]= maincontroller.getAssets().get(i).getName();
+					}else if(j == 1) {
+						data01[i][j]= maincontroller.getAssets().get(i).getStats();
+					}else if(j == 2) {
+						data01[i][j]= maincontroller.getAssets().get(i).getLocation();
+					}else if(j == 3) {
+						data01[i][j]= maincontroller.getAssets().get(i).getFirstname() +" "+ maincontroller.getAssets().get(i).getLastname();
+					}else if(j == 4) {
+						data01[i][j]= maincontroller.getAssets().get(i).getLastname();
+					}
+					}	
+				}
+				String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+
+				JTable table_1 = new JTable(data01, coloumns01);
+				table_1.setFillsViewportHeight(true);
+
+				table_1.setForeground(new Color(138, 43, 226));
+				table_1.setBackground(new Color(255, 228, 225));
+				table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list01 = new GridBagConstraints();
+				gbc_list01.anchor = GridBagConstraints.NORTHWEST;
+				gbc_list01.gridx = 1;
+				gbc_list01.gridy = 1;
+						
+				GridBagConstraints gbc_table_1 = new GridBagConstraints();
+				gbc_table_1.insets = new Insets(0, 0, 5, 0);
+				gbc_table_1.fill = GridBagConstraints.BOTH;
+				gbc_table_1.gridx = 0;
+				gbc_table_1.gridy = 1;
+				ViewAllAssets.add(new JScrollPane(table_1), gbc_list01);
+				
 			}
 		});
 		mnInventories.add(mntmViewAllCeu);
@@ -935,6 +912,44 @@ public class AdminPage extends JFrame {
 				layeredPane.add(Borrowed);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				Borrowed.removeAll();
+				
+				String data04[][] = new String [maincontroller.getBorrowed().size()][5];
+				
+				for(int i = 0; i < maincontroller.getBorrowed().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data04[i][j]= maincontroller.getBorrowed().get(i).getName();
+					}else if(j == 1) {
+						data04[i][j]= maincontroller.getBorrowed().get(i).getStats();
+					}else if(j == 2) {
+						data04[i][j]= maincontroller.getBorrowed().get(i).getLocation();
+					}else if(j == 3) {
+						data04[i][j]= maincontroller.getBorrowed().get(i).getFirstname() +" "+ maincontroller.getBorrowed().get(i).getLastname();
+					}else if(j == 4) {
+						data04[i][j]= maincontroller.getBorrowed().get(i).getLastname();
+					}
+					}	
+				}
+				String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+
+				JTable table_4 = new JTable(data04, coloumns01);
+
+				table_4.setForeground(new Color(138, 43, 226));
+				table_4.setBackground(new Color(255, 228, 225));
+				table_4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list04 = new GridBagConstraints();
+				gbc_list04.anchor = GridBagConstraints.NORTHWEST;
+				gbc_list04.gridx = 1;
+				gbc_list04.gridy = 1;
+						
+				GridBagConstraints gbc_table_4 = new GridBagConstraints();
+				gbc_table_4.insets = new Insets(0, 0, 5, 0);
+				gbc_table_4.fill = GridBagConstraints.BOTH;
+				gbc_table_4.gridx = 0;
+				gbc_table_4.gridy = 1;
+				Borrowed.add(new JScrollPane(table_4), gbc_list04);
 			}
 		});
 		mnStatusOfAssets.add(mntmBorrowed);
@@ -946,6 +961,44 @@ public class AdminPage extends JFrame {
 				layeredPane.add(Returned);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				Returned.removeAll();
+				
+				String data05[][] = new String [maincontroller.getReturned().size()][5];
+				
+				for(int i = 0; i < maincontroller.getReturned().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data05[i][j]= maincontroller.getReturned().get(i).getName();
+					}else if(j == 1) {
+						data05[i][j]= maincontroller.getReturned().get(i).getStats();
+					}else if(j == 2) {
+						data05[i][j]= maincontroller.getReturned().get(i).getLocation();
+					}else if(j == 3) {
+						data05[i][j]= maincontroller.getReturned().get(i).getFirstname() +" "+ maincontroller.getReturned().get(i).getLastname();
+					}else if(j == 4) {
+						data05[i][j]= maincontroller.getReturned().get(i).getLastname();
+					}
+					}	
+				}
+				String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+
+				JTable table_5 = new JTable(data05, coloumns01);
+
+				table_5.setForeground(new Color(138, 43, 226));
+				table_5.setBackground(new Color(255, 228, 225));
+				table_5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list05 = new GridBagConstraints();
+				gbc_list05.anchor = GridBagConstraints.NORTHWEST;
+				gbc_list05.gridx = 1;
+				gbc_list05.gridy = 1;
+						
+				GridBagConstraints gbc_table_5 = new GridBagConstraints();
+				gbc_table_5.insets = new Insets(0, 0, 5, 0);
+				gbc_table_5.fill = GridBagConstraints.BOTH;
+				gbc_table_5.gridx = 0;
+				gbc_table_5.gridy = 1;
+				Returned.add(new JScrollPane(table_5), gbc_list05);
 			}
 		});
 		mnStatusOfAssets.add(mntmReturn);
@@ -957,6 +1010,45 @@ public class AdminPage extends JFrame {
 				layeredPane.add(Available);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				Available.removeAll();
+				
+				String data06[][] = new String [maincontroller.getAvailable().size()][5];
+				
+				for(int i = 0; i < maincontroller.getAvailable().size(); i++) {
+					for(int j = 0; j < 5; j++) {
+						
+					if(j == 0) {
+						data06[i][j]= maincontroller.getAvailable().get(i).getName();
+					}else if(j == 1) {
+						data06[i][j]= maincontroller.getAvailable().get(i).getStats();
+					}else if(j == 2) {
+						data06[i][j]= maincontroller.getAvailable().get(i).getLocation();
+					}else if(j == 3) {
+						data06[i][j]= maincontroller.getAvailable().get(i).getFirstname() +" "+ maincontroller.getAvailable().get(i).getLastname();
+					}else if(j == 4) {
+						data06[i][j]= maincontroller.getAvailable().get(i).getLastname();
+					}
+					}	
+				}
+				
+				String coloumns01 [] = {"Item", "Availablity", "Location", "Checked Out By"};
+
+				
+				JTable table_6 = new JTable(data06, coloumns01);
+				table_6.setForeground(new Color(138, 43, 226));
+				table_6.setBackground(new Color(255, 228, 225));
+				table_6.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				GridBagConstraints gbc_list06 = new GridBagConstraints();
+				gbc_list06.anchor = GridBagConstraints.NORTHWEST;
+				gbc_list06.gridx = 1;
+				gbc_list06.gridy = 1;
+						
+				GridBagConstraints gbc_table_6 = new GridBagConstraints();
+				gbc_table_6.insets = new Insets(0, 0, 5, 0);
+				gbc_table_6.fill = GridBagConstraints.BOTH;
+				gbc_table_6.gridx = 0;
+				gbc_table_6.gridy = 1;
+				Available.add(new JScrollPane(table_6), gbc_list06);
 			}
 		});
 		mnStatusOfAssets.add(mntmAvailable);
@@ -971,6 +1063,8 @@ public class AdminPage extends JFrame {
 				layeredPane.add(AccountInfos);
 				layeredPane.repaint();
 				layeredPane.revalidate();
+				AccountInfos.setForeground(Color.BLACK);
+				AccountInfos.setBackground(new Color(255, 228, 225));
 			}
 		});
 		mnSettings.add(mntmAccountInformation);
@@ -1002,5 +1096,22 @@ public class AdminPage extends JFrame {
 				lblBackground.setIcon(new ImageIcon(AdminPage.class.getResource("/Images/12.jpg")));
 				lblBackground.setBounds(-3, 142, 696, 241);
 				panel.add(lblBackground);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }

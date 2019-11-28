@@ -78,6 +78,7 @@ public class Database {
 		}
 	}
 	
+	
 	public Employee loginVerification(String email, String password) {
 		
 		
@@ -170,15 +171,13 @@ public class Database {
 		
 		boolean added = false;
 		try {
-			cs = connect.prepareCall("{call addAsset(?,?,?)}");
+			cs = connect.prepareCall("{call addAsset(?,?)}");
 			
 			cs.setString(1, assets.getName());
-			cs.setInt(2, assets.getBranch().getBranch_id());
-			cs.setInt(3, assets.getStatus().getStatusId());
+			cs.setString(2, assets.getLocation());
 			
-			cs.execute();
+			cs.executeQuery();
 			
-			rs = cs.executeQuery();
 
 			added = true;
 
@@ -187,6 +186,8 @@ public class Database {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		getAsset();
 		
 		return added;
 	}
@@ -217,7 +218,8 @@ public class Database {
 	
 	public LinkedList<Assets> getGPAssets(){
 		
-		LinkedList<Assets> temps = new LinkedList<Assets>();
+		asset_list.clear();
+
 		
 		try {
 			cs = connect.prepareCall("{call getGPAssets()}");
@@ -228,7 +230,7 @@ public class Database {
 			
 			while(rs.next()) {
 				
-				temps.add(new Assets(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+				asset_list.add(new Assets(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 				
 			}
 			
@@ -236,13 +238,13 @@ public class Database {
 			e.printStackTrace();
 		}
 		
-		return temps;
+		return asset_list;
 	}
 	
 	public LinkedList<Assets> getLvAssets(){
 		
-		LinkedList<Assets> temps = new LinkedList<Assets>();
-		
+		asset_list.clear();
+
 		try {
 			cs = connect.prepareCall("{call getLVAssets()}");
 			
@@ -252,7 +254,7 @@ public class Database {
 			
 			while(rs.next()) {
 				
-				temps.add(new Assets(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+				asset_list.add(new Assets(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 				
 			}
 			
@@ -260,7 +262,7 @@ public class Database {
 			e.printStackTrace();
 		}
 		
-		return temps;
+		return asset_list;
 	}
 	
 	public LinkedList<Assets> getReturned(){

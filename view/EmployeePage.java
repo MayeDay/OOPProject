@@ -50,7 +50,7 @@ public class EmployeePage extends JFrame {
 	public EmployeePage() {
 		maincontroller = Maincontroller.getMaincontroller();
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Pong\\eclipse-workspace\\OOPProject\\src\\Images\\download (2).jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EmployeePage.class.getResource("/Images/download (2).jpg")));
 		setTitle("CEU");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 424, 577);
@@ -86,7 +86,7 @@ public class EmployeePage extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBackground(new Color(248, 248, 255));
+		panel.setBackground(new Color(255, 228, 225));
 		panel.setBounds(10, 131, 397, 360);
 		contentPane.add(panel);
 		btnSignOut.setBounds(310, 504, 97, 25);

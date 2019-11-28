@@ -8,10 +8,6 @@ public class Assets {
 	private String firstname;
 	private String lastname;
 	
-	private Branch branch;
-	
-	private Status status;
-	
 	public Assets(String name, String stats, String location, String firstname, String lastname) {
 		
 		this.name = name;
@@ -60,28 +56,5 @@ public class Assets {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	
-
-	
-	
-	
-	
-	
+	}	
 }

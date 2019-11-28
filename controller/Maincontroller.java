@@ -46,10 +46,10 @@ public class Maincontroller {
 		return database.addEmployee(new Employee(firstname, lastname, dob, age, address, email, phonenumber, password, position_code, status_code));
 	}
 	
-	public boolean addAsset(String name, String status, String location, String firstname, String lastname) {
+	public boolean addAsset(String name, String location) {
 		
 		boolean added = false;
-		this.assets = new Assets(name, status, location, firstname, lastname);
+		this.assets = new Assets(name, "Available", location, "N/A", "N/A");
 		
 		if(database.addAsset(assets)) {
 			added = true;
