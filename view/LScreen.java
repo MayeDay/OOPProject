@@ -138,10 +138,15 @@ public class LScreen extends JFrame {
 			String pass = txtpassword.getText();
 		
 			if(maincontroller.verifyLogin(email, pass)) {
-					
-				AdminPage Ap = new AdminPage();
-				Ap.setVisible(true);
-				dispose();
+				if(maincontroller.getLoggedInEmployee().getClearance_lvl().equals("Admin")) {
+					AdminPage Ap = new AdminPage();
+					Ap.setVisible(true);
+					dispose();
+				}else if(maincontroller.getLoggedInEmployee().getClearance_lvl().equals("Regular")) {
+					EmployeePage page = new EmployeePage();
+					page.setVisible(true);
+					dispose();
+				}
 			}else {
 				JOptionPane.showMessageDialog(null, "        " + "Invalid Account! \n" + "        " + "Please try again");
 			}

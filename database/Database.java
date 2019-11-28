@@ -69,7 +69,7 @@ public class Database {
 			rs = cs.executeQuery();
 			
 			while(rs.next()) {
-				employee_list.add(new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getLong(8), rs.getString(9), rs.getString(10), rs.getString(11)));
+				employee_list.add(new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getLong(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)));
 			}
 			
 			

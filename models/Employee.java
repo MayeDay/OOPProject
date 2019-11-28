@@ -23,6 +23,7 @@ public class Employee{
 	
 	private int status_code;
 	private String status_name;
+	private String clearance_lvl;
 	
 	public Employee() {
 		
@@ -45,7 +46,7 @@ public class Employee{
 		
 	}
 	
-	public Employee(int id, String firstname, String lastname, Date date_of_birth, int age, String address, String email, long phone_number, String password, String position_title, String status_name) {
+	public Employee(int id, String firstname, String lastname, Date date_of_birth, int age, String address, String email, long phone_number, String password, String position_title, String status_name, String clearance_lvl) {
 	
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -58,6 +59,7 @@ public class Employee{
 		this.phone_number = phone_number;
 		this.position_title = position_title;
 		this.status_name = status_name;
+		this.clearance_lvl = clearance_lvl;
 		
 	}
 	
@@ -77,6 +79,14 @@ public class Employee{
 	}
 	
 	
+	public String getClearance_lvl() {
+		return clearance_lvl;
+	}
+
+	public void setClearance_lvl(String clearance_lvl) {
+		this.clearance_lvl = clearance_lvl;
+	}
+
 	public int getPosition_code() {
 		return position_code;
 	}
